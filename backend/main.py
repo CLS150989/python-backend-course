@@ -48,13 +48,41 @@ async def calling_user_perquery_parameter_id(id : int):
 #     indexed_user = filter(lambda user : user.name == name, users_list )
 #     return list(indexed_user)
     
-
-
+@app.post("/user")
+async def add_user(user : User):
+    if user in users_list:
+    
+    #type(search_user(user.id)) == User:
+        return "user already created"
+    else:
+        users_list.append(user)
+        return "new user created"
+    
+    
+@app.put("/user")
+async def update_user_per_id(user : User):
+    
+    found = False
+    
+    for index, update_user in enumerate(users_list):
+        if update_user.id == user.id:   
+            users_list[index] = user
+            found = True
+            return "user updated"
+    
+    if not found:
+        return "user doesn't exist"
+        
+        
+            
 def search_user(id:int):
     indexed_user = filter(lambda user : user.id, users_list)
     try:
        return list(indexed_user)[id - 1] 
     except:
         return {"error": "no user found"}
+    
+    
+    
     
     
