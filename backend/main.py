@@ -36,8 +36,9 @@ async def users_perID(id : int):
     
    return search_user(id) 
     
+    
+    
 #calling user per id  / name through query parameter. Example: http://0.0.0.0:8000/user-query/?id=1
-
 @app.get("/user-query-id")
 async def calling_user_perquery_parameter_id(id : int):
     return search_user(id)
